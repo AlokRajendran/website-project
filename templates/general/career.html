@@ -1,0 +1,65 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<br>
+<h1 class="text-center pb-5">Career</h1>
+
+
+<div class="container">
+
+    <form method="POST" enctype="multipart/form-data">
+            
+        <div class="row justify-content-center">
+                
+                {% csrf_token %}
+        
+                <!-- {{ form.as_p }} -->
+                
+                <!-- {{ form.name }}
+                {{ form.email }}
+                {{ form.message }} -->
+        
+                <div class="col-4">
+                  <input class="form-control mb-3"  type="text" id="{{ form.name.auto_id }}" name="{{ form.name.html_name }}" placeholder="Enter Name">
+                    <div class="text-danger">{{ form.name.errors}}</div>
+                    
+                </div>
+                <div class="col-4">
+                  <input class="form-control mb-3" type="email" id="{{ form.email.auto_id }}" name="{{ form.email.html_name }}" placeholder="Enter E-Mail">
+                  <div class="text-danger">{{ form.email.errors}}</div>
+                
+                </div>
+        </div>
+
+           
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    
+                    <textarea class="form-control mb-3" id="{{ form.message.auto_id }}" name="{{ form.message.html_name }}" placeholder="Write Your Message Here." cols="20" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mb-3"> 
+                <div class="col-4">Upload your resume 
+
+                </div>
+                <div class="col-4"> 
+
+                    <input type="file" name="{{ form.resume.html_name }}" id="{{ form.resume.auto_id }}" class="form-control-file">
+                    <div class="text-danger">{{ form.resume.errors}}</div>
+                
+                </div>
+            </div> 
+        
+                <div class="text-center">
+                    <input class="btn btn-success" type="submit" value="Send Resume">
+                </div>
+            
+           
+        </div>
+        
+    </form>
+
+</div>
+
+{% endblock %}
