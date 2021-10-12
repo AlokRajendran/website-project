@@ -25,23 +25,37 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+
+            {% url 'general:home' as homeurl %}
+            <li class="nav-item {% if request.path == homeurl %} active  {% endif %}">
+              <!-- <a class="nav-link {% if request.path == '/' %} text-danger {% endif %}" href="{% url 'general:home' %}">Home</a> -->
+              <a class="nav-link {% if request.path == homeurl %} text-danger {% endif %}" href="{{ homeurl }}">Home</a>
+
             </li>
             
-            
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'general:career' %}">Career</a>
+            {% url 'general:career' as careerurl %}
+
+            <li class="nav-item {% if request.path == careerurl %} active {% endif %}">
+              <!-- <a class="nav-link" href="{% url 'general:career' %}">Career</a> -->
+              <a class="nav-link" href="{{ careerurl}}">Career</a>
+
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'general:contact' %}">Contact</a>
-            </li>
+            {% url 'general:contact' as contacturl %}
             
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'general:tandc' %}">T&amp;C</a>
+            <li class="nav-item {% if request.path == contacturl %} active {% endif %}">
+                <a class="nav-link" href="{{ contacturl }}">Contact</a>
+            </li>
+
+            {% url 'general:tandc' as tandcurl %}
+            
+            <li class="nav-item {% if request.path == '/terms_and_conditions/' %} active {% endif %}">
+                <!-- <a class="nav-link" href="{% url 'general:tandc' %}">T&amp;C</a> -->
+                <a class="nav-link" href="{{ tandcurl }}">T&amp;C</a>
+
             </li> 
           </ul>
+
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -57,13 +71,59 @@
       </ul>
       {% endif %} 
       
-
     </div>
-    <div class="container">
-    {% block content %}
 
-    {% endblock %} 
-    </div>  
+    <div class="container-fluid px-0">
+      {% block content %}
+
+      {% endblock %} 
+    </div>
+    
+    <div class="container-fluid pt-4 bg-info">
+
+      <div class="row">
+        <div class="col-3 text-light">
+          <h3>About</h3>
+          <hr class="bg-light">
+          <p>FAQ</p>
+          <p>Privacy Policy</p>
+          <p>About Us</p>
+          <p>Terms And Conditions</p>
+          <p>RSS Feed</p>
+        </div>
+
+        <div class="col-3 text-light">
+          <h3>News</h3>
+          <hr class="bg-light">
+          <p>Sports</p>
+          <p>Travel</p>
+          <p>Business</p>
+          <p>Politics</p>
+          <p>Technology</p>
+        </div>
+
+        <div class="col-3 text-light">
+          <h3>Features</h3>
+          <hr class="bg-light">
+          <p>Store</p>
+          <p>Subscription</p>
+          <p>Accessibility</p>
+        </div>
+
+        <div class="col-3 text-light">
+          <h3>More</h3>
+          <hr class="bg-light">
+          <p>Newsletter</p>
+          <p>Ads</p>
+          <p>SiteMap</p>
+        </div>
+
+      </div>
+
+    <div class="text-center py=2 text-light bg-dark">
+      {% now "Y" %} &copy; ALL RIGHTS RESERVED
+    </div>
+
     <script type = "text/javascript" src = "{% static 'js/bootstrap.min.js' %}"></script>
     <script type = "text/javascript" src = "{% static 'js/popper.min.js' %}"></script>
     
